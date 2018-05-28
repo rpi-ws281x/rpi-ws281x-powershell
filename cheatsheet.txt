@@ -1,0 +1,1 @@
+dotnet publish -r linux-arm && scp -r /home/daniel/Documents/RPI/ws281xPowerShell/bin/Debug/netcoreapp2.0/linux-arm/publish/ pi@10.42.0.17:/home/pi/Documents/testDemo/ws281xPowerShell

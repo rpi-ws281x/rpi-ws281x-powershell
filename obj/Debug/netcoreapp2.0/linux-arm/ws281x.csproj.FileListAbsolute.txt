@@ -1,0 +1,13 @@
+/home/daniel/Documents/RPI/myLed/bin/Debug/netcoreapp2.0/linux-arm/libhostpolicy.so
+/home/daniel/Documents/RPI/myLed/bin/Debug/netcoreapp2.0/linux-arm/libhostfxr.so
+/home/daniel/Documents/RPI/myLed/bin/Debug/netcoreapp2.0/linux-arm/ws281x
+/home/daniel/Documents/RPI/myLed/bin/Debug/netcoreapp2.0/linux-arm/ws281x.deps.json
+/home/daniel/Documents/RPI/myLed/bin/Debug/netcoreapp2.0/linux-arm/ws281x.runtimeconfig.json
+/home/daniel/Documents/RPI/myLed/bin/Debug/netcoreapp2.0/linux-arm/ws281x.runtimeconfig.dev.json
+/home/daniel/Documents/RPI/myLed/bin/Debug/netcoreapp2.0/linux-arm/ws281x.dll
+/home/daniel/Documents/RPI/myLed/bin/Debug/netcoreapp2.0/linux-arm/ws281x.pdb
+/home/daniel/Documents/RPI/myLed/obj/Debug/netcoreapp2.0/linux-arm/ws281x.csproj.CoreCompileInputs.cache
+/home/daniel/Documents/RPI/myLed/obj/Debug/netcoreapp2.0/linux-arm/ws281x.AssemblyInfoInputs.cache
+/home/daniel/Documents/RPI/myLed/obj/Debug/netcoreapp2.0/linux-arm/ws281x.AssemblyInfo.cs
+/home/daniel/Documents/RPI/myLed/obj/Debug/netcoreapp2.0/linux-arm/ws281x.dll
+/home/daniel/Documents/RPI/myLed/obj/Debug/netcoreapp2.0/linux-arm/ws281x.pdb
