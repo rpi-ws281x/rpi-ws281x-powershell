@@ -6,17 +6,24 @@ Since this wraps another library (a C library - ws2811.so), we need to set this 
 
 1 - clone this repo
 
-2 - cd ./rpi-ws281x-powershell
+2 - cd ./rpi-ws281x-powershell/
 
 3 - cp ./Dependency/ws2811.so /usr/bin
+
+
+# New to PowerShell? 
+
+[Check here how to install it](https://github.com/PowerShell/PowerShell/tree/master/docs/installation/linux.md#raspbian)
 
 # Examples
 
 This will properly documented in a near future.
 
+In the folder that you've just cloned, enter on PowerShell with `sudo pwsh`
+
 ## Explosion
 ```
-Import-Module ./publish/ws281xPowerShell.dll -Force
+Import-Module ./bin/Debug/netcoreapp2.0/linux-arm/publish/ws281xPowerShell.dll
 $explosionSettings = [PSCustomObject]@{
 	NumberOfLeds = 21
 	Brightness = 5
