@@ -33,7 +33,7 @@ namespace WS281x.CmdLets
 		protected override void BeginProcessing()
 		{
 			Settings settings = Settings.CreateDefaultSettings();
-            settings.Channels[0] = new Channel(1, GpioPin, Brightness, Invert, StripType.WS2812_STRIP);
+            settings.Channel = new Channel(30, GpioPin, Brightness, Invert, StripType.WS2812_STRIP);
 			_Controller = new WS281x(settings);
 		}
 

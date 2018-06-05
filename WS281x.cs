@@ -25,19 +25,19 @@ namespace WS281x
 			_ws2811 = new ws2811_t();
 			//Pin the object in memory. Otherwise GC will probably move the object to another memory location.
 			//This would cause errors because the native library has a pointer on the memory location of the object.
-			//_ws2811Handle = GCHandle.Alloc(_ws2811, GCHandleType.Pinned);
+			_ws2811Handle = GCHandle.Alloc(_ws2811, GCHandleType.Pinned);
 
 			_ws2811.dmanum	= settings.DMAChannel;
 			_ws2811.freq	= settings.Frequency;
-			_ws2811.channel = new ws2811_channel_t[PInvoke.RPI_PWM_CHANNELS];
-			
-			for(int i=0; i< _ws2811.channel.Length; i++)
-			{
-				if(settings.Channels[i] != null)
-				{
-					InitChannel(i, settings.Channels[i]);
-				}
-			}
+			_ws2811.channel1 = new ws2811_channel_t();
+			InitChannel(settings.Channel);
+			// for(int i=0; i< _ws2811.channel.Length; i++)
+			// {
+			// 	if(settings.Channels[i] != null)
+			// 	{
+			// 		InitChannel(i, settings.Channels[i]);
+			// 	}
+			// }
 
 			Settings = settings;
 
@@ -58,15 +58,16 @@ namespace WS281x
 		/// </summary>
 		public void Render()
 		{
-			for(int i=0; i< Settings.Channels.Length; i++)
-			{
-				if (Settings.Channels[i] != null)
-				{
-					var ledColor = Settings.Channels[i].Leds.Select(x => x.RGBValue).ToArray();
-					Marshal.Copy(ledColor, 0, _ws2811.channel[i].leds, ledColor.Count());
-				}
-			}
-			
+			// for(int i=0; i< Settings.Channels.Length; i++)
+			// {
+			// 	if (Settings.Channels[i] != null)
+			// 	{
+			// 		var ledColor = Settings.Channels[i].Leds.Select(x => x.RGBValue).ToArray();
+			// 		Marshal.Copy(ledColor, 0, _ws2811.channel[i].leds, ledColor.Count());
+			// 	}
+			// }
+			var ledColor = Settings.Channel.Leds.Select(x => x.RGBValue).ToArray();
+			Marshal.Copy(ledColor, 0, _ws2811.channel1.leds, ledColor.Count());
 			var result = PInvoke.ws2811_render(ref _ws2811);
 			if (result != ws2811_return_t.WS2811_SUCCESS)
 			{
@@ -81,9 +82,17 @@ namespace WS281x
 		/// <param name="channelIndex">Channel which controls the LED</param>
 		/// <param name="ledID">ID/Index of the LED</param>
 		/// <param name="color">New color</param>
-		public void SetLEDColor(int ledID, Color color, int channelIndex = 0)
+		public void SetLEDColor(int ledID, Color color)
 		{
-			Settings.Channels[channelIndex].Leds[ledID].Color = color;
+			Settings.Channel.Leds[ledID].Color = color;
+		}
+
+		public void SetColorOnAllLEDs(Color color)
+		{
+			for(int i = 0 ; i < Settings.Channel.Leds.Count ; ++i)
+			{
+				Settings.Channel.Leds[i].Color = color;
+			}
 		}
 
 		/// <summary>
@@ -92,22 +101,22 @@ namespace WS281x
 		public Settings Settings { get; private set; }
 
 		/// <summary>
-		/// Initialize the channel propierties
+		/// Initialize the channel properties
 		/// </summary>
-		/// <param name="channelIndex">Index of the channel tu initialize</param>
+		/// <param name="channelIndex">Index of the channel to initialize</param>
 		/// <param name="channelSettings">Settings for the channel</param>
-		private void InitChannel(int channelIndex, Channel channelSettings)
+		private void InitChannel(Channel channelSettings)
 		{
-			_ws2811.channel[channelIndex].count			= channelSettings.Leds.Count;
-			_ws2811.channel[channelIndex].gpionum		= channelSettings.GPIOPin;
-			_ws2811.channel[channelIndex].brightness	= channelSettings.Brightness;
-			_ws2811.channel[channelIndex].invert		= Convert.ToInt32(channelSettings.Invert);
+			_ws2811.channel1.count			= channelSettings.Leds.Count;
+			_ws2811.channel1.gpionum		= channelSettings.GPIOPin;
+			_ws2811.channel1.brightness	= channelSettings.Brightness;
+			_ws2811.channel1.invert		= Convert.ToInt32(channelSettings.Invert);
 
 			if(channelSettings.StripType != StripType.Unknown)
 			{
 				//Strip type is set by the native assembly if not explicitly set.
 				//This type defines the ordering of the colors e. g. RGB or GRB, ...
-				_ws2811.channel[channelIndex].strip_type = (int)channelSettings.StripType;
+				_ws2811.channel1.strip_type = (int)channelSettings.StripType;
 			}
 		}
 
@@ -140,7 +149,7 @@ namespace WS281x
 				if(_isDisposingAllowed)
 				{
 					PInvoke.ws2811_fini(ref _ws2811);
-					//_ws2811Handle.Free(); //until I find a way to successfully allocate the resource, this will throw exception
+					_ws2811Handle.Free(); //until I find a way to successfully allocate the resource, this will throw exception
 										
 					_isDisposingAllowed = false;
 				}

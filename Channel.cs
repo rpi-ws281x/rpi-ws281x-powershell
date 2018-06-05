@@ -22,7 +22,7 @@ namespace WS281x
 
 		/// <summary>
 		/// Gets or sets the brightness of the LEDs
-		/// 0 = darkes, 255 = brightest
+		/// 0 = darkest, 255 = brightest
 		/// </summary>
 		public byte Brightness { get; set; }
 

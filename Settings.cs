@@ -19,7 +19,7 @@ namespace WS281x
 		{
 			Frequency = frequency;
 			DMAChannel = dmaChannel;
-			Channels = new Channel[PInvoke.RPI_PWM_CHANNELS];				
+
 		}
 
 		/// <summary>
@@ -45,6 +45,6 @@ namespace WS281x
 		/// <summary>
 		/// Returns the channels which holds the LEDs
 		/// </summary>
-		public Channel[] Channels { get; private set; }
+		public Channel Channel { get; set; }
 	}
 }
