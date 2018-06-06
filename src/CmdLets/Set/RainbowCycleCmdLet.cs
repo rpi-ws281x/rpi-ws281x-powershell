@@ -19,9 +19,11 @@ namespace WS281x.CmdLets
 		public byte Brightness { get; set; }
 
 		[Parameter(Mandatory = false)]
-		public SwitchParameter Invert {get;set;}
+		public SwitchParameter Invert { get; set; }
+		
+		[Parameter(Mandatory = false, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, Position = 2)]
+		public int NumberOfCycles { get; set ;}
 
-		[Parameter(Mandatory = false)]
 		public int GpioPin {get; set;}
 
 		private bool shouldAbort;
@@ -42,38 +44,42 @@ namespace WS281x.CmdLets
 
 		protected override void	ProcessRecord()
 		{
+			if(NumberOfCycles == 0)
+			{
+				NumberOfCycles = 1;
+			}
+
 			Settings settings = Settings.CreateDefaultSettings();
             settings.Channel = new Channel(NumberOfLeds, GpioPin, Brightness, Invert, StripType.WS2812_STRIP);
 			WS281x controller = new WS281x(settings);
 			List<Color> colors = GetColors();
-			int currentColorIndex = 0;
-			while(!shouldAbort)
+
+			for(int iterations = 0 ; iterations < NumberOfCycles ; ++iterations)
 			{
-				Color currentColor = colors[currentColorIndex++];
-				for(int i = 0 ; i < NumberOfLeds ; ++i)
+				for(int colorCycle = 0; colorCycle < colors.Count; ++colorCycle)
 				{
-					//Iterate over all LEDs and display the current color
-					controller.SetLEDColor(i,currentColor);
-					controller.Render();
-					Thread.Sleep(25);
-					
+					Color currentColor = colors[colorCycle];
+					for(int i = 0 ; i < NumberOfLeds ; ++i)
+					{
+						//Iterate over all LEDs and display the current color
+						controller.SetLEDColor(i,currentColor);
+						controller.Render();
+						Thread.Sleep(25);	
+					}
 				}
-				if(currentColorIndex >= colors.Count)
-				{
-					currentColorIndex = 0;
-				}				
 			}
 		}
 
 		private List<Color> GetColors() => new List<Color>()
 		{
-			Color.FromArgb(0x201000),
-			Color.FromArgb(0x202000),
+			Color.DarkRed,
+			Color.Red,
+			Color.Orange,
+			Color.Yellow,
 			Color.Green,
-			Color.FromArgb(0x002020),
-			Color.Blue,
-			Color.FromArgb(0x100010),
-			Color.FromArgb(0x200010)
+			Color.Lime,
+			Color.Cyan,
+			Color.Blue
 		};
 	}
 }

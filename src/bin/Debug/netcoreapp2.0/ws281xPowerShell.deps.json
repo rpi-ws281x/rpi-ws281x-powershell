@@ -1,0 +1,38 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.0",
+    "signature": "f844bb3ead1d3b8f256d04c4f0ae0b25dc743875"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.0": {
+      "ws281xPowerShell/1.0.0": {
+        "dependencies": {
+          "System.Management.Automation": "6.1.7601.17515"
+        },
+        "runtime": {
+          "ws281xPowerShell.dll": {}
+        }
+      },
+      "System.Management.Automation/6.1.7601.17515": {
+        "runtime": {
+          "lib/net45/System.Management.Automation.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ws281xPowerShell/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Management.Automation/6.1.7601.17515": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mOqRM+nD607Cw+2seNWfayjtsae41rcarVHgJ5aHIn2y2RF5N6z71bIOqrpITomKzi7R0msz5gUOco041+aDTw==",
+      "path": "system.management.automation/6.1.7601.17515",
+      "hashPath": "system.management.automation.6.1.7601.17515.nupkg.sha512"
+    }
+  }
+}
