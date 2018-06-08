@@ -8,4 +8,16 @@
   <ItemGroup>
     <PackageReference Include="System.Management.Automation" Version="6.1.7601.17515" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Include="lib\ws2811.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="WS281x.psd1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="init.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
