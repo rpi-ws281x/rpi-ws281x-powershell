@@ -6,7 +6,7 @@ Since this wraps another library (a C library - ws2811.so), we need to set this 
 
 1 - clone this repo
 
-2 - `import-module ./rpi-ws281x-powershell/bin/Debug/netcoreapp2.0/linux-arm/publish/ws281xPowerShell.dll`
+2 - `import-module ./rpi-ws281x-powershell/bin/Debug/netcoreapp2.0/linux-arm/publish/ws281x.psd1`
 
 
 # New to PowerShell? 
