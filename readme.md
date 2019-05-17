@@ -4,29 +4,29 @@ This project is based on the [rpi-ws281x-csharp](https://github.com/rpi-ws281x/r
 
 Since this wraps another library (a C library - ws2811.so), we need to set this .so file where the `P/Invoke` search. In order to do so:
 
-1 - clone [this repo](https://github.com/jgarff/rpi_ws281x/tree/e4a05d6538c02bb9714f2efc6630f2bfdcf35bf6#build)
+1. Clone [this repo](https://github.com/jgarff/rpi_ws281x/tree/e4a05d6538c02bb9714f2efc6630f2bfdcf35bf6#build)
+2. Follow [this installation](https://github.com/jgarff/rpi_ws281x/tree/e4a05d6538c02bb9714f2efc6630f2bfdcf35bf6#build)
 
-2 - follow [this installation](https://github.com/jgarff/rpi_ws281x/tree/e4a05d6538c02bb9714f2efc6630f2bfdcf35bf6#build) 
-
-# New to PowerShell? 
+## New to PowerShell?
 
 [Check here how to install it](https://github.com/PowerShell/PowerShell/tree/master/docs/installation/linux.md#raspbian)
 
-# Examples
+## Examples
 
 This will properly documented in a near future.
 
 In the folder that you've just cloned, enter on PowerShell with `sudo pwsh`
 
 ## Explosion
-```
+
+```powershell
 Import-Module ./bin/Debug/netcoreapp2.0/linux-arm/publish/ws281xPowerShell.dll
 $explosionSettings = [PSCustomObject]@{
-	NumberOfLeds = 21
-	Brightness = 5
-	LeftSideColor = [System.Drawing.Color]::Blue
-	RightSideColor = [System.Drawing.Color]::Green
-	Speed = "Slow"
+  NumberOfLeds = 21
+  Brightness = 5
+  LeftSideColor = [System.Drawing.Color]::Blue
+  RightSideColor = [System.Drawing.Color]::Green
+  Speed = "Slow"
 }
 $explosionSettings | Set-Explosion
 ```
