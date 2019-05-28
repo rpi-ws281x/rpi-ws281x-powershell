@@ -16,7 +16,10 @@
       },
       "System.Management.Automation/6.1.7601.17515": {
         "runtime": {
-          "lib/net45/System.Management.Automation.dll": {}
+          "lib/net45/System.Management.Automation.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "6.1.7601.17514"
+          }
         }
       }
     }

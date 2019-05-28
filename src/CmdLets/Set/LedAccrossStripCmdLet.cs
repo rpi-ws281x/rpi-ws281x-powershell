@@ -19,7 +19,7 @@ namespace WS281x.CmdLets
 		[Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, Position = 2)]
 		public Color Color { get; set; }
 
-		[Parameter(Mandatory = false, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, Position = 5)]
+		[Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, Position = 5)]
 		[ValidateSet("Slow", "Medium","Fast")]
 		public string Speed { get; set; }
 
@@ -65,7 +65,7 @@ namespace WS281x.CmdLets
 				controller.Render();
 				Thread.Sleep(_speedTranslation[Speed]);
 			}
-			//"hack". turn the last led of 
+			//"hack". turn the last led off 
 			controller.SetLEDColor(NumberOfLeds-1,Color.Empty);
 			controller.Render();
 			//for some reason it has to be explicitly disposed
