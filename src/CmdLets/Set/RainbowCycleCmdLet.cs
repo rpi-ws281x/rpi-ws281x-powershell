@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace WS281x.CmdLets
 {
-	
+
 	[Cmdlet(VerbsCommon.Set, "RainbowCycle")]
 	public class RainbowCycle : Cmdlet
 	{
@@ -20,21 +20,21 @@ namespace WS281x.CmdLets
 
 		[Parameter(Mandatory = false)]
 		public SwitchParameter Invert { get; set; }
-		
+
 		[Parameter(Mandatory = false, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, Position = 2)]
 		public int NumberOfCycles { get; set ;}
 
 		public int GpioPin {get; set;}
 
 		private bool shouldAbort;
-		
+
 		//private WS281x _controller;
 
 		public RainbowCycle()
 		{
 			Invert = false;
 			GpioPin = 18;
-			
+
 		}
 
 		protected override void BeginProcessing()
@@ -50,7 +50,7 @@ namespace WS281x.CmdLets
 			}
 
 			Settings settings = Settings.CreateDefaultSettings();
-            settings.Channel = new Channel(NumberOfLeds, GpioPin, Brightness, Invert, StripType.WS2812_STRIP);
+            settings.Channel = new Channel(NumberOfLeds, GpioPin, Brightness, Invert, StripType.WS2811_STRIP_GRB);
 			WS281x controller = new WS281x(settings);
 			List<Color> colors = GetColors();
 
@@ -64,7 +64,7 @@ namespace WS281x.CmdLets
 						//Iterate over all LEDs and display the current color
 						controller.SetLEDColor(i,currentColor);
 						controller.Render();
-						Thread.Sleep(25);	
+						Thread.Sleep(25);
 					}
 				}
 			}

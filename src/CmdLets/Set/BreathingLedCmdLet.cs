@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace WS281x.CmdLets
 {
-	
+
 	[Cmdlet(VerbsCommon.Set, "BreathingLed")]
 	public class BreathingLed : Cmdlet
 	{
@@ -28,7 +28,7 @@ namespace WS281x.CmdLets
 		{
 			Invert = false;
 			GpioPin = 18;
-			
+
 		}
 
 		protected override void BeginProcessing()
@@ -46,7 +46,7 @@ namespace WS281x.CmdLets
 			int i = 0;
 			while(true)
 			{
-				settings.Channel = new Channel(30, GpioPin, (byte)_brightness, Invert, StripType.WS2812_STRIP);
+				settings.Channel = new Channel(30, GpioPin, (byte)_brightness, Invert, StripType.WS2811_STRIP_GRB);
 				using(WS281x controller = new WS281x(settings))
 				{
 					//controller.SetLEDColor(this.LedId, this.Color);
@@ -74,7 +74,7 @@ namespace WS281x.CmdLets
 				}
 				else
 				{
-					_brightness -=1;	
+					_brightness -=1;
 				}
 				i+=1;
 				Console.WriteLine($"index = {i} / Brightness = {_brightness} / BreathingAsc = {breathingAsc}");

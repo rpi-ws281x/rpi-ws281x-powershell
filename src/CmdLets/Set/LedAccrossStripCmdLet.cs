@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace WS281x.CmdLets
 {
-	
+
 	[Cmdlet(VerbsCommon.Set, "LedAccrossStrip")]
 	public class LedAccrossStrip : Cmdlet
 	{
@@ -35,7 +35,7 @@ namespace WS281x.CmdLets
 		{
 			Invert = false;
 			GpioPin = 18;
-			
+
 		}
 
 		protected override void BeginProcessing()
@@ -51,21 +51,21 @@ namespace WS281x.CmdLets
 		protected override void	ProcessRecord()
 		{
 			Settings settings = Settings.CreateDefaultSettings();
-            settings.Channel = new Channel(NumberOfLeds, GpioPin, Brightness, Invert, StripType.WS2812_STRIP);
+            settings.Channel = new Channel(NumberOfLeds, GpioPin, Brightness, Invert, StripType.WS2811_STRIP_GRB);
 			WS281x controller = new WS281x(settings);
 
-			
+
 			for(int i = 0 ; i < NumberOfLeds ; ++i)
 			{
 				for(int j = 0 ; j < i ; ++j)
 				{
 					controller.SetLEDColor(j, Color.Empty);
 				}
-				controller.SetLEDColor(i,Color);	
+				controller.SetLEDColor(i,Color);
 				controller.Render();
 				Thread.Sleep(_speedTranslation[Speed]);
 			}
-			//"hack". turn the last led off 
+			//"hack". turn the last led off
 			controller.SetLEDColor(NumberOfLeds-1,Color.Empty);
 			controller.Render();
 			//for some reason it has to be explicitly disposed
