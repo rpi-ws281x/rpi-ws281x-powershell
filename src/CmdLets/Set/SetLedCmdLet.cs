@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Management.Automation;  // PowerShell namespace.
 namespace WS281x.CmdLets
 {
-	
+
 	[Cmdlet(VerbsCommon.Set, "SingleLedColor")]
 	public class SetSingleLedColor : Cmdlet , IDisposable
 	{
@@ -27,13 +27,13 @@ namespace WS281x.CmdLets
 		{
 			Invert = false;
 			GpioPin = 18;
-			
+
 		}
 
 		protected override void BeginProcessing()
 		{
 			Settings settings = Settings.CreateDefaultSettings();
-            settings.Channel = new Channel(30, GpioPin, Brightness, Invert, StripType.WS2812_STRIP);
+            settings.Channel = new Channel(30, GpioPin, Brightness, Invert, StripType.WS2811_STRIP_GRB);
 			_Controller = new WS281x(settings);
 		}
 
